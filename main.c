@@ -61,7 +61,7 @@ void quadric (float a, float b, float c, float eps)     // Функция рас
     }
 
     else if (fabs(D) <= eps) {    // Случай, когда квадратное уравнение имеет 2 одинаковых корня
-        x1 = -b/(2*a);
+        x1 = -b / (2*a);
         printf ("Answer: %f", x1);
     }
 
