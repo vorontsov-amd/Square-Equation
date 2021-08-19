@@ -55,8 +55,8 @@ void quadric (float a, float b, float c, float eps)     // Функция рас
     D = b * b - 4 * a * c;
 
     if (D > 0) {    // Случай, когда квадратное уравнение имеет 2 корня
-        x1 = (-b + sqrt(D))/(2*a);
-        x2 = (-b - sqrt(D))/(2*a);
+        x1 = (-b + sqrt(D)) / (2*a);
+        x2 = (-b - sqrt(D)) / (2*a);
         printf ("Answer: %f, %f", x1, x2);
     }
 
