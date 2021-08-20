@@ -66,7 +66,7 @@ void quadric (float a, float b, float c)     // Функция рассматр�
     float x1 = 0;
     float x2 = 0;
 
-    D = discriminant(a, b, c);
+    D = discriminant (a, b, c);
 
     if (D > 0) {    // Случай, когда квадратное уравнение имеет 2 корня
         x1 = (-b + sqrt(D)) / (2*a);
