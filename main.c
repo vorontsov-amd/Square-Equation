@@ -6,7 +6,7 @@
 void scan (float a, float b, float c);
 void linear (float a, float b, float c);
 void quadric (float a, float b, float c);
-float discriminant (float a, float b, float c );
+float discriminant (float a, float b, float c);
 void ans (float x1, float x2);
 float zero (float number);
 
