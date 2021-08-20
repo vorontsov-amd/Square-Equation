@@ -1,71 +1,107 @@
 #include <stdio.h>
 #include <math.h>
+#include <locale.h>
+#define EPS 1e-7    // малая величина
 
-void linear (float a, float b, float c, float eps);
-void quadric (float a, float b, float c, float eps);
+void scan (float a, float b, float c);
+void linear (float a, float b, float c);
+void quadric (float a, float b, float c);
+float discriminant(float a, float b, float c );
+void ans (float x1, float x2);
+float zero (float number);
 
-int main () // Функция получает на ввод значения для решения задачи
+int main ()
 {
     float a = 0;    // параметры a, b и c в уравнении вида ax^2+bx+c=0
     float b = 0;
     float c = 0;
-    float eps = 1e-7;   // малая величина
 
-    printf ("Enter parameter a\n");
-    scanf ("%f", &a);
+    setlocale (LC_ALL, "Rus");
 
-    printf ("Enter parameter b\n");
-    scanf ("%f", &b);
+    scan (a, b, c);
 
-    printf ("Enter parameter c\n");
-    scanf ("%f", &c);
-
-    linear (a, b, c, eps);
     return 0;
 }
 
-void linear (float a, float b, float c, float eps)  // Функция рассматривает случай, когда уравнение линейное
+void scan (float a, float b, float c)   // Функция собирает информацию об уравнении, которое нужно решить
+{
+    printf ("Введите параметр a\n");
+    scanf ("%f", &a);
+
+    printf ("Введите параметр b\n");
+    scanf ("%f", &b);
+
+    printf ("Введите параметр c\n");
+    scanf ("%f", &c);
+
+    linear(a, b, c);
+}
+
+
+void linear (float a, float b, float c)  // Функция рассматривает случай, когда уравнение линейное
 {
     float x = 0;
 
-    if (fabs(a) <= eps && fabs(b) > eps) {   // Случай, когда уравнение линейное
+    if (zero(a) <= EPS && zero(b) > EPS) {   // Случай, когда уравнение линейное
         x = -c / b;
-        printf ("Answer: %f\n", x);
+        printf ("Ответ %f\n", x);
     }
 
-    else if (fabs(a) <= eps && fabs(b) <= eps && fabs(c) > eps) {  // Cлучай, когда 0 приравнивается к числу
-        printf ("The equation has no solutions.");
+    else if (zero(a) <= EPS && zero(b) <= EPS && zero(c) > EPS) {  // Cлучай, когда 0 приравнивается к числу
+        printf ("Уравнение не имеет корней.\n");
     }
 
-    else if (fabs(a) <= eps && fabs(b) <= eps && fabs(c) <= eps) {    // Случай, когда 0 = 0
-        printf ("The equation has countless solutions.");
+    else if (zero(a) <= EPS && zero(b) <= EPS && zero(c) <= EPS) {    // Случай, когда 0 = 0
+        printf ("Уравнение имеет бесчисленное множество решений.\n");
     }
 
     else {
-        quadric (a, b, c, eps);
+        quadric (a, b, c);
     }
 }
 
-void quadric (float a, float b, float c, float eps)     // Функция рассматривает случай, когда уравнение квадратное
+void quadric (float a, float b, float c)     // Функция рассматривает случай, когда уравнение квадратное
 {
     float D = 0;
     float x1 = 0;
     float x2 = 0;
 
-    D = b * b - 4 * a * c;
+    D = discriminant(a, b, c);
 
     if (D > 0) {    // Случай, когда квадратное уравнение имеет 2 корня
         x1 = (-b + sqrt(D)) / (2*a);
         x2 = (-b - sqrt(D)) / (2*a);
-        printf ("Answer: %f, %f", x1, x2);
     }
 
-    else if (fabs(D) <= eps) {    // Случай, когда квадратное уравнение имеет 2 одинаковых корня
+    else if (zero(D) <= EPS) {    // Случай, когда квадратное уравнение имеет 2 одинаковых корня
         x1 = -b / (2*a);
-        printf ("Answer: %f", x1);
     }
 
     else if (D < 0) {  // Случай, когда квадратное уравнение не имеет действительных корней
-        printf ("The equation has no solutions, on the field of real numbers.");
+        printf ("Уравнение не имеет корней в области действительных чисел.\n");
     }
+
+    ans(x1, x2);  // Вывод ответа
+}
+
+float discriminant (float a, float b,float c)   // Фунция считает дискриминант квадратного уравнения
+{
+    float d = b * b - 4 * a * c;
+    return d;
+}
+
+void ans (float x1, float x2)   // Функция выводит корни квадратного уравнения
+{
+    if (zero(x1) > EPS && zero(x2) <= EPS) {
+        printf ("Ответ: %f\n", x1);
+        }
+    else if (zero(x1) > EPS && zero(x2) > EPS) {
+        printf ("Ответ: %f %f\n", x1, x2);
+        }
+}
+
+float zero (float number)    // Вспомогательная фунция для сравнения float`ов
+{
+    float nule = fabs (number);
+    return nule;
 }
