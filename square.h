@@ -8,7 +8,7 @@
 #include <assert.h>
 
 
-const double EPS = 1e-7;    // малая величина
+const double EPS = 1e-7;    // РјР°Р»Р°СЏ РІРµР»РёС‡РёРЅР°
 
 enum Solutions
 {
