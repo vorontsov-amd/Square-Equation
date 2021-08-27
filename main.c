@@ -207,6 +207,6 @@ void programm_test ()       // Функция проверяет, правиль
 
 bool isFail (const double aTest, const double bTest, const double cTest, const double x1Test, const double x2Test, Solutions TestSolutions)
 {
-    double x1 = 0, x2 = 0;
+    double x1 = 0, x2 = 0;      //Значения х1 и х2, которые посчитала программа)
     return !(TestSolutions == nRoots (aTest, bTest, cTest, &x1, &x2) && cmp_two_doubles (x1, x1Test) && cmp_two_doubles (x2, x2Test));
 }
