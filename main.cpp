@@ -29,23 +29,23 @@ int main ()
     return 0;
 }
 
-void scan_three_coef (double* a, double* b, double* c)   // Функция собирает информацию об уравнении, которое нужно решить
+void scan_three_coef (double* a, double* b, double* c)   // Р¤СѓРЅРєС†РёСЏ СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± СѓСЂР°РІРЅРµРЅРёРё, РєРѕС‚РѕСЂРѕРµ РЅСѓР¶РЅРѕ СЂРµС€РёС‚СЊ
 {
     assert (a);
     assert (b);
     assert (c);
 
-    printf ("Введите параметр a\n");
+    printf ("Р’РІРµРґРёС‚Рµ РїР°СЂР°РјРµС‚СЂ a\n");
     scanf ("%lf", a);
 
-    printf ("Введите параметр b\n");
+    printf ("Р’РІРµРґРёС‚Рµ РїР°СЂР°РјРµС‚СЂ b\n");
     scanf ("%lf", b);
 
-    printf ("Введите параметр c\n");
+    printf ("Р’РІРµРґРёС‚Рµ РїР°СЂР°РјРµС‚СЂ c\n");
     scanf ("%lf", c);
 }
 
-Solutions nRoots (const double a, const double b, const double c, double* x1, double* x2)            // функция считает количество корней
+Solutions nRoots (const double a, const double b, const double c, double* x1, double* x2)            // С„СѓРЅРєС†РёСЏ СЃС‡РёС‚Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№
 {
     Solutions countRoots = NO_ROOT;
 
@@ -59,7 +59,7 @@ Solutions nRoots (const double a, const double b, const double c, double* x1, do
     return countRoots;
 }
 
-void solve_linear_eq (const double b, const double c, double* x1, double* x2, Solutions* countRoots)  // Функция рассматривает случай, когда уравнение линейное
+void solve_linear_eq (const double b, const double c, double* x1, double* x2, Solutions* countRoots)  // Р¤СѓРЅРєС†РёСЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚ СЃР»СѓС‡Р°Р№, РєРѕРіРґР° СѓСЂР°РІРЅРµРЅРёРµ Р»РёРЅРµР№РЅРѕРµ
 {
 
     assert (x1);
@@ -73,7 +73,6 @@ void solve_linear_eq (const double b, const double c, double* x1, double* x2, So
         else
             *countRoots = NO_ROOT;
     }
-
     else
     {
         *x1 = *x2 = calc_linear_root (b, c);
@@ -82,7 +81,7 @@ void solve_linear_eq (const double b, const double c, double* x1, double* x2, So
 
 }
 
-void solve_quadric_eq (const double a, const double b, const double c, double* x1, double* x2, Solutions* countRoots)     // Функция рассматривает случай, когда уравнение квадратное
+void solve_quadric_eq (const double a, const double b, const double c, double* x1, double* x2, Solutions* countRoots)     // Р¤СѓРЅРєС†РёСЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚ СЃР»СѓС‡Р°Р№, РєРѕРіРґР° СѓСЂР°РІРЅРµРЅРёРµ РєРІР°РґСЂР°С‚РЅРѕРµ
 {
     assert (x1);
     assert (x2);
@@ -90,7 +89,7 @@ void solve_quadric_eq (const double a, const double b, const double c, double* x
 
     double D = calc_discriminant(a, b, c);
 
-    if (D >= 0)   // если уравнение имеет корни
+    if (D >= 0)   // РµСЃР»Рё СѓСЂР°РІРЅРµРЅРёРµ РёРјРµРµС‚ РєРѕСЂРЅРё
     {
         *x1 = calc_first_quadric_root (a, b, D);
         *x2 = calc_second_quadric_root (a, b, D);
@@ -99,73 +98,70 @@ void solve_quadric_eq (const double a, const double b, const double c, double* x
         else
             *countRoots = TWO_ROOT;
     }
-
-    else                       // если не имеет
+    else                       // РµСЃР»Рё РЅРµ РёРјРµРµС‚
         *countRoots = NO_ROOT;
 
 }
 
-inline double calc_discriminant (const double a, const double b, const double c)   // Функция считает дискриминант квадратного уравнения
+inline double calc_discriminant (const double a, const double b, const double c)   // Р¤СѓРЅРєС†РёСЏ СЃС‡РёС‚Р°РµС‚ РґРёСЃРєСЂРёРјРёРЅР°РЅС‚ РєРІР°РґСЂР°С‚РЅРѕРіРѕ СѓСЂР°РІРЅРµРЅРёСЏ
 {
     return b * b - 4 * a * c;
 }
 
-bool cmp_two_doubles (const double first, const double second)    // Вспомогательная фунция для сравнения даблов
+bool cmp_two_doubles (const double first, const double second)    // Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅС†РёСЏ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ РґР°Р±Р»РѕРІ
 {
     double module = fabs (first - second);
     if (module <= EPS)
         return true;
     else
         return false;
-
 }
 
-inline double calc_first_quadric_root (const double a, const double b, const double D)  // Считает 1-ый корень квадратного уравнения
+inline double calc_first_quadric_root (const double a, const double b, const double D)  // РЎС‡РёС‚Р°РµС‚ 1-С‹Р№ РєРѕСЂРµРЅСЊ РєРІР°РґСЂР°С‚РЅРѕРіРѕ СѓСЂР°РІРЅРµРЅРёСЏ
 {
     return (-b + sqrt (D)) / (2 * a);
 }
 
-inline double calc_second_quadric_root (const double a, const double b, const double D)      // Считает второй корень квадратного уравнения
+inline double calc_second_quadric_root (const double a, const double b, const double D)      // РЎС‡РёС‚Р°РµС‚ РІС‚РѕСЂРѕР№ РєРѕСЂРµРЅСЊ РєРІР°РґСЂР°С‚РЅРѕРіРѕ СѓСЂР°РІРЅРµРЅРёСЏ
 {
     return (-b - sqrt (D)) / (2 * a);
 }
 
-inline double calc_linear_root (const double b, const double c)                      // Считает корень линейного уравнения
+inline double calc_linear_root (const double b, const double c)                      // РЎС‡РёС‚Р°РµС‚ РєРѕСЂРµРЅСЊ Р»РёРЅРµР№РЅРѕРіРѕ СѓСЂР°РІРЅРµРЅРёСЏ
 {
     return -c / b;
 }
 
-void print_answer (const int nSolutions, const double x1, const double x2)     // Функция выводит ответ
+void print_answer (const int nSolutions, const double x1, const double x2)     // Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґРёС‚ РѕС‚РІРµС‚
 {
     switch (nSolutions)
     {
         case INF_ROOT:
-            printf ("Ответ: Уравнение имеет бесчисленное множетсво корней\n");
+            printf ("РћС‚РІРµС‚: РЈСЂР°РІРЅРµРЅРёРµ РёРјРµРµС‚ Р±РµСЃС‡РёСЃР»РµРЅРЅРѕРµ РјРЅРѕР¶РµС‚СЃРІРѕ РєРѕСЂРЅРµР№\n");
             break;
         case NO_ROOT:
-            printf ("Уравнение не имеет корней\n");
+            printf ("РЈСЂР°РІРЅРµРЅРёРµ РЅРµ РёРјРµРµС‚ РєРѕСЂРЅРµР№\n");
             break;
         case ONE_ROOT:
-            printf ("Ответ: х1 = %lf\n", x1);
+            printf ("РћС‚РІРµС‚: С…1 = %lf\n", x1);
             break;
         case TWO_ROOT:
-            printf ("Ответ: х1 = %lf    x2 = %lf\n", x1, x2);
+            printf ("РћС‚РІРµС‚: С…1 = %lf    x2 = %lf\n", x1, x2);
             break;
         default:
-            printf ("ERROR: количество корней %d\n", nSolutions);
+            printf ("ERROR: РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№ %d\n", nSolutions);
     }
 }
 
-void programm_test ()       // Функция проверяет, правильно ли работает программа
-{                           // тестируя её с известными коэфициентами и сравнивая полученные корни
-                            // с просчитанными вручную корнями
+void programm_test ()       // Р¤СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚, РїСЂР°РІРёР»СЊРЅРѕ Р»Рё СЂР°Р±РѕС‚Р°РµС‚ РїСЂРѕРіСЂР°РјРјР°
+{                           // С‚РµСЃС‚РёСЂСѓСЏ РµС‘ СЃ РёР·РІРµСЃС‚РЅС‹РјРё РєРѕСЌС„РёС†РёРµРЅС‚Р°РјРё Рё СЃСЂР°РІРЅРёРІР°СЏ РїРѕР»СѓС‡РµРЅРЅС‹Рµ РєРѕСЂРЅРё
+                            // СЃ РїСЂРѕСЃС‡РёС‚Р°РЅРЅС‹РјРё РІСЂСѓС‡РЅСѓСЋ РєРѕСЂРЅСЏРјРё
     double aTest = NAN, bTest = NAN, cTest = NAN, x1Test = NAN, x2Test = NAN;
     int intSolutions;
     Solutions TestSolutions;
 
-    printf ("Введите параметры a, b, c и количество корней, которое имеет данное уравнение\n");
-    printf ("Если уравнение имеет бесчисленное множетсво корней введите количество корней -1\n");
-
+    printf ("Р’РІРµРґРёС‚Рµ РїР°СЂР°РјРµС‚СЂС‹ a, b, c Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№, РєРѕС‚РѕСЂРѕРµ РёРјРµРµС‚ РґР°РЅРЅРѕРµ СѓСЂР°РІРЅРµРЅРёРµ\n");
+    printf ("Р•СЃР»Рё СѓСЂР°РІРЅРµРЅРёРµ РёРјРµРµС‚ Р±РµСЃС‡РёСЃР»РµРЅРЅРѕРµ РјРЅРѕР¶РµС‚СЃРІРѕ РєРѕСЂРЅРµР№ РІРІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№ -1\n");
 
     while (scanf ("%lf %lf %lf %d", &aTest, &bTest, &cTest, &intSolutions) == 4)
         {
@@ -179,31 +175,31 @@ void programm_test ()       // Функция проверяет, правильно ли работает программ
                 break;
             case 1:
                 TestSolutions = ONE_ROOT;
-                printf ("Введите x1\n");
+                printf ("Р’РІРµРґРёС‚Рµ x1\n");
                 scanf ("%lf", &x1Test);
-
+                 
                 x2Test = x1Test;
 
                 break;
             case 2:
                 TestSolutions = TWO_ROOT;
-                printf ("Введите x1 и х2 в порядке возрастания\n");
+                printf ("Р’РІРµРґРёС‚Рµ x1 Рё С…2 РІ РїРѕСЂСЏРґРєРµ РІРѕР·СЂР°СЃС‚Р°РЅРёСЏ\n");
                 scanf ("%lf %lf", &x1Test, &x2Test);
 
                 break;
             default:
-                printf ("Некоректные данные, введите числа снова\n");
+                printf ("РќРµРєРѕСЂРµРєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ, РІРІРµРґРёС‚Рµ С‡РёСЃР»Р° СЃРЅРѕРІР°\n");
                 continue;
         }
         if (isFail (aTest, bTest, cTest, x1Test, x2Test, TestSolutions))
             {
-            printf ("Обнаружена ошибка при параметрах a = %lf b = %lf c = %lf \n", aTest, bTest, cTest);
-            printf ("x1 = %lf, x2 = %lf (Количество корней %d)\n", x1Test, x2Test, intSolutions);
+            printf ("РћР±РЅР°СЂСѓР¶РµРЅР° РѕС€РёР±РєР° РїСЂРё РїР°СЂР°РјРµС‚СЂР°С… a = %lf b = %lf c = %lf \n", aTest, bTest, cTest);
+            printf ("x1 = %lf, x2 = %lf (РљРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№ %d)\n", x1Test, x2Test, intSolutions);
             }
         else
             {
-            printf ("Ошибок не обнаруженo\n");
-            printf ("Введите следующие данные для проверки\n");
+            printf ("РћС€РёР±РѕРє РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅo\n");
+            printf ("Р’РІРµРґРёС‚Рµ СЃР»РµРґСѓСЋС‰РёРµ РґР°РЅРЅС‹Рµ РґР»СЏ РїСЂРѕРІРµСЂРєРё\n");
             }
         }
 }
