@@ -18,6 +18,10 @@
 
 Поскольку код программы в открытом доступе, при желании Вы можете модифицировать код. В программе присутствует функция programm_test, которая проверяет, корректно ли работает сама программа.
 
+## Документация
+
+Документация доступна по ссылке: https://github.com/vorontsov-amd/meow/blob/main/index.html
+
 ## Пример работы с программой
 
 ![](https://sun9-35.userapi.com/impg/da4xoDit6zX91MrgGJ99OZpCFK1WqIEJ-Zi_gg/h0mDyo7QRhI.jpg?size=1103x635&quality=96&sign=cec31cc2a22ef01f8db38557871db8f1&type=album)
