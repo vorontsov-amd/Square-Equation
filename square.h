@@ -1,3 +1,7 @@
+///\file
+///\brief head file on program solves linear and square equation (mail.cpp)
+
+
 #ifndef SQUARE_H_INCLUDED
 #define SQUARE_H_INCLUDED
 
@@ -10,7 +14,7 @@
 
 const double EPS = 1e-7;    // малая величина
 
-enum Solutions
+enum solutions
 {
     INF_ROOT = -1,
     NO_ROOT = 0,
@@ -29,7 +33,7 @@ enum Solutions
 //! @param [out]  b    b-coefficient
 //! @param [out]  c    c-coefficient
 //---------------------------------------------------------------------------
-void scan_three_coef (double* a, double* b, double* c);
+void ScanThreeCoef (double* a, double* b, double* c);
 
 
 //---------------------------------------------------------------------------
@@ -45,7 +49,7 @@ void scan_three_coef (double* a, double* b, double* c);
 //!
 //! @note In case of infinite number of roots, returns -1
 //---------------------------------------------------------------------------
-Solutions nRoots (const double a, const double b, const double c, double* x1, double* x2);
+solutions SolveSquareLinearEq (const double a, const double b, const double c, double* x1, double* x2);
 
 
 //---------------------------------------------------------------------------
@@ -54,13 +58,10 @@ Solutions nRoots (const double a, const double b, const double c, double* x1, do
 //! @param [in]   b            b-coefficient
 //! @param [in]   c            c-coefficient
 //! @param [out]  x1           Pointer to the 1st root
-//! @param [out]  x2           Pointer to the 2st root
-//! @param [out]  countRoots   Pointer to count of roots
 //!
-//! @note consider the second root so that it is not NAN
-//!       and so that the check function works correctly
+//! @return Number of roots
 //---------------------------------------------------------------------------
-void solve_linear_eq (const double b, const double c, double* x1, double* x2, Solutions* countRoots);
+solutions SolveLinearEq (const double b, const double c, double* x1);
 
 
 //---------------------------------------------------------------------------
@@ -71,9 +72,10 @@ void solve_linear_eq (const double b, const double c, double* x1, double* x2, So
 //! @param [in]   c           c-coefficient
 //! @param [out]  x1          Pointer to the 1st root
 //! @param [out]  x2          Pointer to the 2st root
-//! @param [out]  countRoots  Pointer to count of roots
+//!
+//! @return Number of roots
 //---------------------------------------------------------------------------
-void solve_quadric_eq (const double a, const double b, const double c, double* x1, double* x2, Solutions* countRoots);
+solutions SolveQuadricEq (const double a, const double b, const double c, double* x1, double* x2);
 
 
 //---------------------------------------------------------------------------
@@ -85,7 +87,7 @@ void solve_quadric_eq (const double a, const double b, const double c, double* x
 //!
 //! @return   The value of the discriminant
 //---------------------------------------------------------------------------
-inline double calc_discriminant (const double a, const double b, const double c);
+static inline double CalcDiscriminant (const double a, const double b, const double c);
 
 
 //---------------------------------------------------------------------------
@@ -96,52 +98,52 @@ inline double calc_discriminant (const double a, const double b, const double c)
 //!
 //! @return true if first = second, else false
 //---------------------------------------------------------------------------
-bool cmp_two_doubles (const double first, const double second);
+bool NumbersAreEqual (const double first, const double second);
 
 
 //---------------------------------------------------------------------------
 //! The function considers the first root on the quadric equation
 //!
-//! @param [in]   a            a-coefficient
-//! @param [in]   b            b-coefficient
-//! @param [in]   D            discriminant
+//! @param [in]   a               a-coefficient
+//! @param [in]   b               b-coefficient
+//! @param [in]   discriminant    discriminant
 //!
 //! @return   The value of the first equation
 //---------------------------------------------------------------------------
-inline double calc_first_quadric_root (const double a, const double b, const double D);
+static inline double CalcFirstQuadricRoot (const double a, const double b, const double sqrt_d);
 
 
 //---------------------------------------------------------------------------
 //! The function considers the second root on the quadric equation
 //!
-//! @param [in]   a            a-coefficient
-//! @param [in]   b            b-coefficient
-//! @param [in]   D            discriminant
+//! @param [in]   a               a-coefficient
+//! @param [in]   b               b-coefficient
+//! @param [in]   discriminant    discriminant
 //!
 //! @return   The value of the first equation
 //---------------------------------------------------------------------------
-inline double calc_second_quadric_root (const double a, const double b, const double D);
+static inline double CalcSecondQuadricRoot (const double a, const double b, const double sqrt_d);
 
 
 //---------------------------------------------------------------------------
 //! The function considers the root on the linear equation
 //!
-//! @param [in]   a            a-coefficient
 //! @param [in]   b            b-coefficient
+//! @param [in]   c            c-coefficient
 //!
 //! @return   The value of the first equation
 //---------------------------------------------------------------------------
-inline double calc_linear_root (const double b, const double c);
+static inline double CalcLinearRoot (const double b, const double c);
 
 
 //---------------------------------------------------------------------------
 //! Displays the response on the screen
 //!
-//! @param [in]   nSolutions            Number of Solutions
+//! @param [in]   n_solutions            Number of Solutions
 //! @param [in]   x1                    First answer
 //! @param [in]   x2                    Second answer
 //---------------------------------------------------------------------------
-void print_answer (const int nSolutions, const double x1, const double x2);
+void PrintAnswer (solutions n_solutions, const double x1, const double x2);
 
 
 //---------------------------------------------------------------------------
@@ -149,21 +151,47 @@ void print_answer (const int nSolutions, const double x1, const double x2);
 //!
 //! @note You will have to manually count the roots
 //---------------------------------------------------------------------------
-void programm_test ();
+void ProgramTest ();
 
 
 //---------------------------------------------------------------------------
-//! Compares manually calculated results with program results
+//! Compares the table result with the program result
 //!
-//! @param [in]   a               a-coefficient (Test)
-//! @param [in]   b               b-coefficient (Test)
-//! @param [in]   c               c-coefficient (Test)
-//! @param [in]   x1              1st root
-//! @param [in]   x2              2st root
-//! @param [in]   TestSolutions   number of roots
+//! @param [in]   a_test               a-coefficient (Test)
+//! @param [in]   b_test               b-coefficient (Test)
+//! @param [in]   c_test               c-coefficient (Test)
+//! @param [in]   x1_test              1st root (Test)
+//! @param [in]   x2_test              2st root (Test)
+//! @param [in]   num_root_test        number of roots (Test)
 //!
-//! @return False if there are no errors, true if there are errors
+//! @return True if there are errors, otherwise false
 //---------------------------------------------------------------------------
-bool isFail (const double aTest, const double bTest, const double cTest, const double x1Test, const double x2Test, Solutions TestSolutions);
+bool IsFail (const int test_number, const double a_test, const double b_test, const double c_test, solutions num_root_test, const double x1_test, const double x2_test);
+
+
+//---------------------------------------------------------------------------
+//! Compares the table result with the program result
+//!
+//! @param [in]   a_test               a-coefficient (Test)
+//! @param [in]   b_test               b-coefficient (Test)
+//! @param [in]   c_test               c-coefficient (Test)
+//! @param [in]   x1_test              1st root (Test)
+//! @param [in]   x2_test              2st root (Test)
+//! @param [in]   num_root_test        number of roots (Test)
+//! @param [in]   num_root_program     number of roots (return SolveSquareLinearEq)
+//! @param [in]   x1_program           1st root  (out SolveSquareLinearEq)
+//! @param [in]   x2_program           1st root  (out SolveSquareLinearEq)
+//!
+//! @return True if there are errors, otherwise false
+//---------------------------------------------------------------------------
+bool ErrorText (const int test_number, const double a_test, const double b_test, const double c_test, const double x1_program, const double x2_program, const double x1_expected, const double x2_expected, solutions num_root_program, solutions num_root_test);
+
+
+//---------------------------------------------------------------------------
+//! Clears the memory buffer
+//!
+//! @note Designed for code readability
+//---------------------------------------------------------------------------
+void ClearBuffer ();
 
 #endif // SQUARE_H_INCLUDED
