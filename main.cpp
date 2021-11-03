@@ -22,7 +22,7 @@ int main ()
 
     setlocale (LC_ALL, "Rus");
 
-#ifndef UNIT_TEST
+#ifdef UNIT_TEST
     ProgramTest ();
 #endif
 
